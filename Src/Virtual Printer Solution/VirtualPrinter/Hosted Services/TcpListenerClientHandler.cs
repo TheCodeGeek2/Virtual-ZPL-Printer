@@ -47,7 +47,7 @@ namespace VirtualPrinter.Client
 			//
 			client.ReceiveTimeout = 1000;
 			client.SendTimeout = 1000;
-			client.LingerState = new LingerOption(false, 0);
+			client.LingerState = new LingerOption(true, 1);	// DELAY SEEMS BUILT-IN, CHANGING FROM FALSE, 0 TO TRUE, 1
 			client.NoDelay = true;
 			client.ReceiveBufferSize = -1;
 			client.SendBufferSize = -1;
@@ -79,6 +79,10 @@ namespace VirtualPrinter.Client
 							// Get the label image
 							//
 							string zpl = Encoding.UTF8.GetString(buffer);
+
+							// THIS IS WHERE WE CAN COMBINE REQUESTS TO LIMIT THE NUMBER OF REQUESTS TO LABELARY
+							// LABELARY WILL TAKE A MAXIMUM OF 50 LABELS PER REQUEST, WITH 5 RQUESTS PER SECOND, THATS 250 LABELS PER SECOND
+
 
 							if (!zpl.StartsWith("NOP"))
 							{

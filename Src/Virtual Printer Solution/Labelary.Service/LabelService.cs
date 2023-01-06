@@ -47,7 +47,8 @@ namespace Labelary.Service
 
 						content.Headers.TryAddWithoutValidation("X-Rotation", Convert.ToString(labelConfiguration.LabelRotation));
 
-						if (width <= 15 && height <= 15)
+                        // This is for limits imposed by the API and to prevent: HTTP 400 (Bad Request)
+                        if (width <= 15 && height <= 15)
 						{
 							string url = $"{BaseUrl}/{labelConfiguration.Dpmm}dpmm/labels/{width:#.##}x{height:#.##}/{labelIndex}/";
 							
